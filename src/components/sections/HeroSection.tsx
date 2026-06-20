@@ -334,33 +334,37 @@ const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) 
   <AvailableBadge variant="desktop" />
 </div>
 
-          <HeroTitleFill
-            className="absolute left-1/2 top-81 z-10 ml-8 w-169 -translate-x-1/2"
-            frontendSize={152}
-            frontendLine={164}
-            developerSize={139}
-            developerLine={150}
-            developerOffset="mt-8"
+                 <HeroTitleFill
+            className="absolute left-1/2 top-64.75 z-10 w-164.5 -translate-x-1/2"
+            frontendSize={187.765}
+            frontendLine={228}
+            developerSize={168.824}
+            developerLine={205}
+            developerOffset="-mt-8.75"
           />
 
-          <div className="absolute -bottom-20 left-1/2 z-20 ml-8 h-184 w-153 -translate-x-1/2">
-            <Image src="/images/hero-person.png" alt="Edwin Anderson" fill priority className="object-contain object-bottom" />
+          <div className="absolute left-1/2 top-72.25 z-20 h-183.75 w-152.5 -translate-x-1/2">
+            <Image
+              src="/images/hero-person.png"
+              alt="Edwin Anderson"
+              fill
+              priority
+              className="object-contain object-bottom"
+            />
           </div>
 
           <DeveloperOutline
-            className="absolute left-1/2 top-130 z-30 ml-8 w-169 -translate-x-1/2"
-            size={139}
-            lineHeight={150}
+            className="absolute left-1/2 top-113 z-30 w-163.5 -translate-x-1/2"
+            size={168.824}
+            lineHeight={205}
           />
 
-          <div
-            className="absolute left-1/2 top-81 z-30 ml-8 -translate-x-1/2 font-bonheur text-white"
+                   <div
+            className="absolute left-75.25 top-47 z-30 h-35.5 w-50.5 font-bonheur text-white"
             style={{
               fontSize: "113.23px",
               lineHeight: "142px",
-              transform: "translateX(-50%) rotate(-12.34deg)",
-              marginRight: "220px",
-              marginTop: "-40px",
+              transform: "rotate(-12.34deg)",
             }}
           >
             Junior
