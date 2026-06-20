@@ -157,16 +157,15 @@ export default function HeroSection() {
       className="relative min-h-257 overflow-hidden lg:min-h-256"
       style={{ backgroundColor: "#A53F65" }}
     >
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-bg.png"
-          alt=""
-          fill
-          priority
-          className="scale-125 object-cover object-center mix-blend-luminosity lg:scale-100"
-        />
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(165, 56, 96, 0.94)" }} />
-      </div>
+<div className="absolute inset-0 z-0">
+  <Image
+    src="/images/hero-bg.svg"
+    alt=""
+    fill
+    priority
+    className="object-cover object-center"
+  />
+</div>
 
       <div className="relative z-10 min-h-257 lg:hidden">
         <Image src="/icons/star.svg" alt="" width={91} height={91} className="absolute -left-7 top-182 z-10" />
@@ -234,16 +233,26 @@ export default function HeroSection() {
         <Image src="/icons/star.svg" alt="" width={140} height={140} className="absolute left-82 top-108 z-10" />
         <Image src="/icons/star.svg" alt="" width={124} height={124} className="absolute bottom-23 right-86 z-10" />
 
-        <motion.div
-          className="absolute left-36 top-35 z-30 flex h-104 w-28 flex-col items-center justify-center gap-6 rounded-full border border-primary-300/40 bg-white/5"
+      <motion.div
+  className="absolute left-30 top-27 z-30 flex h-102 w-28.25 flex-col items-center justify-center gap-5.5 rounded-full border border-primary-300 px-5.5 py-8"
+  style={{ borderWidth: "1.36px" }}
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5, duration: 0.6 }}
         >
           {techIcons.map((icon) => (
-            <div key={icon.alt} className="flex size-17 items-center justify-center rounded-full border border-primary-300/35">
-              <Image src={icon.src} alt={icon.alt} width={42} height={42} />
-            </div>
+          <div
+  key={icon.alt}
+  className="flex size-17.25 items-center justify-center rounded-full border border-primary-300"
+  style={{ borderWidth: "1.36px" }}
+>
+  <Image
+    src={icon.src}
+    alt={icon.alt}
+    width={icon.alt === "JavaScript" ? 51 : icon.alt === "CSS3" ? 35 : icon.alt === "HTML5" ? 41 : 44}
+    height={icon.alt === "JavaScript" ? 51 : icon.alt === "CSS3" ? 41 : icon.alt === "HTML5" ? 41 : 39}
+  />
+</div>
           ))}
         </motion.div>
 
@@ -283,22 +292,21 @@ export default function HeroSection() {
   Junior
 </div>
 
-        <motion.div
-          className="absolute bottom-38 left-36 z-40 flex w-80 flex-col gap-3"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <div className="flex size-12 items-center justify-center rounded-full border border-primary-300">
-            <Image src="/icons/mic.svg" alt="Mic" width={14} height={20} />
-          </div>
-          <p className="text-body-md font-bold text-white">Hi, I'm Edwin Anderson</p>
-          <p className="text-body-sm font-medium text-white">
-            a frontend developer passionate about creating seamless digital experiences that are fast, responsive,
-            and user-friendly.
-          </p>
-        </motion.div>
-
+       <motion.div
+  className="absolute left-30 top-153.5 z-40 flex w-112.75 flex-col gap-3.5"
+  initial={{ opacity: 0, x: -20 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.6, delay: 0.3 }}
+>
+  <div className="flex size-15.75 items-center justify-center rounded-full border border-primary-300">
+    <Image src="/icons/mic.svg" alt="Mic" width={18} height={26} />
+  </div>
+  <p className="text-body-xl font-bold text-white">Hi, I'm Edwin Anderson</p>
+  <p className="text-body-lg font-medium text-white">
+    a frontend developer passionate about creating seamless digital experiences that are fast, responsive, and
+    user-friendly.
+  </p>
+</motion.div>
         <motion.div
           className="absolute right-19 top-70 z-40 flex w-56 flex-col"
           initial={{ opacity: 0, x: 20 }}

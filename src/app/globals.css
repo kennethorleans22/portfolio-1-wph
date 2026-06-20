@@ -6,9 +6,9 @@
 
 @theme {
   /* ── Font Family ── */
-  --font-sans: 'Montserrat', sans-serif;
-  --font-anton: 'Anton', sans-serif;
-  --font-bonheur: 'Bonheur Royale', cursive;
+  --font-sans: var(--ff-montserrat), sans-serif;
+  --font-anton: var(--ff-anton), sans-serif;
+  --font-bonheur: var(--ff-bonheur), cursive;
 
   /* ── Colors: Gray / Neutral ── */
   --color-gray-25: #fdfdfd;

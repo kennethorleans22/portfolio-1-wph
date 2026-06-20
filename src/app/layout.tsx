@@ -3,19 +3,19 @@ import { Montserrat, Anton, Bonheur_Royale } from "next/font/google";
 import "./globals.css";
 
 const montserrat = Montserrat({
-  variable: "--font-sans",
+  variable: "--ff-montserrat",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
 });
 
 const anton = Anton({
-  variable: "--font-anton",
+  variable: "--ff-anton",
   subsets: ["latin"],
   weight: ["400"],
 });
 
 const bonheurRoyale = Bonheur_Royale({
-  variable: "--font-bonheur",
+  variable: "--ff-bonheur",
   subsets: ["latin"],
   weight: ["400"],
 });
