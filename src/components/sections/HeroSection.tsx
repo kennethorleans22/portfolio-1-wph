@@ -69,20 +69,26 @@ const techIcons: TechIcon[] = [
   { src: "/icons/react.svg", alt: "React" },
 ];
 
-function AvailableBadge() {
+function AvailableBadge({ variant = "mobile" }: { variant?: "mobile" | "desktop" }) {
+  const isDesktop = variant === "desktop";
+
   return (
     <motion.div
-      className="flex h-8 w-fit items-center gap-1.5 rounded-full border border-primary-300 bg-primary-400 px-4"
+      className={`flex w-fit items-center rounded-full border border-primary-300 bg-primary-400 px-4 ${
+        isDesktop ? "h-9.5 gap-1.5" : "h-8 gap-1.5"
+      }`}
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.8, duration: 0.5 }}
     >
       <motion.span
-        className="size-2 rounded-full bg-primary-200"
+        className={`rounded-full bg-primary-200 ${isDesktop ? "size-4" : "size-2"}`}
         animate={{ opacity: [1, 0.35, 1] }}
         transition={{ repeat: Infinity, duration: 1.5 }}
       />
-      <span className="text-body-xs font-semibold text-white">Available for Hire</span>
+      <span className={`font-semibold text-white ${isDesktop ? "text-body-md" : "text-body-xs"}`}>
+        Available for Hire
+      </span>
     </motion.div>
   );
 }
@@ -98,7 +104,7 @@ function ContactButton({ className = "" }: { className?: string }) {
       <span className="flex-1 text-left text-body-sm font-semibold text-gray-950 lg:text-body-md">
         Contact Me
       </span>
-      <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gray-950 lg:size-10">
+   <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-gray-950">
         <ArrowRight size={20} className="text-white" />
       </span>
     </motion.button>
@@ -215,18 +221,45 @@ const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) 
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-y-5">
-            {stats.map((stat, index) => (
-              <div key={stat.label} className={`flex flex-col gap-1 ${index % 2 === 1 ? "border-l border-primary-300 pl-5" : ""}`}>
-                <span className="text-display-md font-bold text-white">
-                  <CountUp target={stat.value} suffix={stat.suffix} />
-                </span>
-                <span className="text-body-xs font-semibold text-white">{stat.label}</span>
-              </div>
-            ))}
-          </div>
+       <div className="flex flex-col gap-5">
+  <div className="flex h-17.25 items-start">
+    <div className="flex flex-1 flex-col gap-0.75">
+      <span className="text-display-md font-bold text-white">
+        <CountUp target={2} suffix="+" />
+      </span>
+      <span className="text-body-xs font-semibold text-white">Years Experience</span>
+    </div>
 
-          <ContactButton className="w-full" />
+    <div className="mx-4 h-15.25 w-px bg-primary-300" />
+
+    <div className="flex flex-1 flex-col gap-0.75">
+      <span className="text-display-md font-bold text-white">
+        <CountUp target={99} suffix="%" />
+      </span>
+      <span className="text-body-xs font-semibold text-white">Client Satisfaction</span>
+    </div>
+  </div>
+
+  <div className="flex h-17.25 items-start">
+    <div className="flex flex-1 flex-col gap-0.75">
+      <span className="text-display-md font-bold text-white">
+        <CountUp target={3} suffix="" />
+      </span>
+      <span className="text-body-xs font-semibold text-white">Project Delivered</span>
+    </div>
+
+    <div className="mx-4 h-15.25 w-px bg-primary-300" />
+
+    <div className="flex flex-1 flex-col gap-0.75">
+      <span className="text-display-md font-bold text-white">
+        <CountUp target={50} suffix="" />
+      </span>
+      <span className="text-body-xs font-semibold text-white">Clients Worldwide</span>
+    </div>
+  </div>
+
+  <ContactButton className="w-full" />
+</div>
         </motion.div>
 
         <div className="absolute left-1/2 top-139 z-40 -translate-x-1/2">
@@ -297,9 +330,9 @@ const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) 
             ))}
           </motion.div>
 
-          <div className="absolute left-1/2 top-65 z-40 -translate-x-1/2">
-            <AvailableBadge />
-          </div>
+       <div className="absolute left-1/2 top-56.75 z-40 -translate-x-1/2">
+  <AvailableBadge variant="desktop" />
+</div>
 
           <HeroTitleFill
             className="absolute left-1/2 top-81 z-10 ml-8 w-169 -translate-x-1/2"
@@ -349,26 +382,27 @@ const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) 
             </p>
           </motion.div>
 
-          <motion.div
-            className="absolute right-19 top-70 z-40 flex w-56 flex-col"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {stats.map((stat, index) => (
-              <div key={stat.label}>
-                <div className="flex flex-col gap-1 py-5">
-                  <span className="text-display-2xl font-bold text-white">
-                    <CountUp target={stat.value} suffix={stat.suffix} />
-                  </span>
-                  <span className="text-body-xs font-semibold text-white">{stat.label}</span>
-                </div>
-                {index < stats.length - 1 && <div className="h-px w-full bg-primary-300" />}
-              </div>
-            ))}
+    <motion.div
+  className="absolute right-30 top-59.25 z-40 flex w-55.5 flex-col gap-5"
+  initial={{ opacity: 0, x: 20 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.6, delay: 0.3 }}
+>
+  {stats.map((stat, index) => (
+    <div key={stat.label} className="contents">
+      <div className="flex h-23.25 flex-col gap-0.75">
+        <span className="text-display-2xl font-bold text-white">
+          <CountUp target={stat.value} suffix={stat.suffix} />
+        </span>
+        <span className="text-body-md font-semibold text-white">{stat.label}</span>
+      </div>
 
-            <ContactButton className="mt-6 h-14 w-full" />
-          </motion.div>
+      {index < stats.length - 1 && <div className="h-px w-full bg-primary-300" />}
+    </div>
+  ))}
+
+  <ContactButton className="h-14 w-full" />
+</motion.div>
         </div>
       </div>
 
