@@ -6,6 +6,25 @@ import { motion, useInView } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import type { StatItem, TechIcon } from "@/types";
 
+function useViewportSize() {
+  const [viewportSize, setViewportSize] = useState<{ width: number; height: number } | null>(null);
+
+  useEffect(() => {
+    const updateSize = () => {
+      setViewportSize({
+        width: document.documentElement.clientWidth || window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+
+    updateSize();
+    window.addEventListener("resize", updateSize);
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  return viewportSize;
+}
+
 function CountUp({ target, suffix }: { target: number; suffix: string }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
@@ -134,10 +153,17 @@ function DeveloperOutline({
   );
 }
 
-function ScrollDown() {
+function ScrollDown({
+  isDesktop,
+  desktopScale,
+}: {
+  isDesktop: boolean;
+  desktopScale: number;
+}) {
   return (
     <motion.div
-      className="absolute bottom-6 left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 lg:bottom-11"
+      className={`absolute left-1/2 z-50 flex -translate-x-1/2 items-center gap-1 ${isDesktop ? "" : "bottom-6"}`}
+      style={isDesktop ? { bottom: 44 * desktopScale } : undefined}
       animate={{ y: [0, 5, 0] }}
       transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
     >
@@ -151,23 +177,24 @@ function ScrollDown() {
 }
 
 export default function HeroSection() {
+const viewportSize = useViewportSize();
+const measuredWidth = viewportSize?.width ?? 1440;
+const measuredHeight = viewportSize?.height ?? 1024;
+const isDesktop = measuredWidth >= 1024;
+const desktopScale = isDesktop ? Math.min(1, measuredWidth / 1440) : 1;
+const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) : 1028;
+
   return (
     <section
       id="home"
-      className="relative min-h-257 overflow-hidden lg:min-h-256"
-      style={{ backgroundColor: "#A53F65" }}
+      className="relative overflow-hidden"
+      style={{ backgroundColor: "#A53F65", minHeight: heroMinHeight }}
     >
-<div className="absolute inset-0 z-0">
-  <Image
-    src="/images/hero-bg.svg"
-    alt=""
-    fill
-    priority
-    className="object-cover object-center"
-  />
-</div>
+      <div className="absolute inset-0 z-0">
+        <Image src="/images/hero-bg.svg" alt="" fill priority className="object-cover object-center" />
+      </div>
 
-      <div className="relative z-10 min-h-257 lg:hidden">
+      <div className="relative z-10 mx-auto min-h-257 w-full max-w-98.25 lg:hidden">
         <Image src="/icons/star.svg" alt="" width={91} height={91} className="absolute -left-7 top-182 z-10" />
         <Image src="/icons/star.svg" alt="" width={99} height={99} className="absolute right-0 top-218 z-10" />
 
@@ -229,107 +256,123 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="relative z-10 hidden min-h-256 lg:block">
-        <Image src="/icons/star.svg" alt="" width={140} height={140} className="absolute left-82 top-108 z-10" />
-        <Image src="/icons/star.svg" alt="" width={124} height={124} className="absolute bottom-23 right-86 z-10" />
-
-      <motion.div
-  className="absolute left-30 top-27 z-30 flex h-102 w-28.25 flex-col items-center justify-center gap-5.5 rounded-full border border-primary-300 px-5.5 py-8"
-  style={{ borderWidth: "1.36px" }}
-          initial={{ opacity: 0, x: -30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
+      <div
+        className="absolute left-1/2 top-0 z-10 hidden lg:block"
+        style={{
+          width: 1440 * desktopScale,
+          height: 1024 * desktopScale,
+          transform: "translateX(-50%)",
+        }}
+      >
+        <div
+          className="relative h-256 w-360"
+          style={{
+            transform: `scale(${desktopScale})`,
+            transformOrigin: "top left",
+          }}
         >
-          {techIcons.map((icon) => (
-          <div
-  key={icon.alt}
-  className="flex size-17.25 items-center justify-center rounded-full border border-primary-300"
-  style={{ borderWidth: "1.36px" }}
->
-  <Image
-    src={icon.src}
-    alt={icon.alt}
-    width={icon.alt === "JavaScript" ? 51 : icon.alt === "CSS3" ? 35 : icon.alt === "HTML5" ? 41 : 44}
-    height={icon.alt === "JavaScript" ? 51 : icon.alt === "CSS3" ? 41 : icon.alt === "HTML5" ? 41 : 39}
-  />
-</div>
-          ))}
-        </motion.div>
+          <Image src="/icons/star.svg" alt="" width={140} height={140} className="absolute left-82 top-108 z-10" />
+          <Image src="/icons/star.svg" alt="" width={124} height={124} className="absolute bottom-23 right-86 z-10" />
 
-        <div className="absolute left-1/2 top-65 z-40 -translate-x-1/2">
-          <AvailableBadge />
-        </div>
-
-    <HeroTitleFill
-  className="absolute left-1/2 top-81 z-10 ml-8 w-169 -translate-x-1/2"
-  frontendSize={152}
-  frontendLine={164}
-  developerSize={139}
-  developerLine={150}
-  developerOffset="mt-8"
-/>
-
-        <div className="absolute -bottom-20 left-1/2 z-20 ml-8 h-184 w-153 -translate-x-1/2">
-          <Image src="/images/hero-person.png" alt="Edwin Anderson" fill priority className="object-contain object-bottom" />
-        </div>
-
-        <DeveloperOutline
-          className="absolute left-1/2 top-130 z-30 ml-8 w-169 -translate-x-1/2"
-          size={139}
-          lineHeight={150}
-        />
-
-      <div 
-  className="absolute left-1/2 top-81 z-30 ml-8 -translate-x-1/2 font-bonheur text-white" 
-  style={{ 
-    fontSize: '113.23px', 
-    lineHeight: '142px',
-    transform: 'translateX(-50%) rotate(-12.34deg)', // Menggabungkan alignment center dan rotasi dari Figma
-    marginRight: '220px', // Mendorong tulisan ke arah kiri atas huruf "F" secara presisi
-    marginTop: '-40px'     // Menyesuaikan tinggi posisi agar pas menempel di atas judul
-  }}
->
-  Junior
-</div>
-
-       <motion.div
-  className="absolute left-30 top-153.5 z-40 flex w-112.75 flex-col gap-3.5"
-  initial={{ opacity: 0, x: -20 }}
-  animate={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.6, delay: 0.3 }}
->
-  <div className="flex size-15.75 items-center justify-center rounded-full border border-primary-300">
-    <Image src="/icons/mic.svg" alt="Mic" width={18} height={26} />
-  </div>
-  <p className="text-body-xl font-bold text-white">Hi, I'm Edwin Anderson</p>
-  <p className="text-body-lg font-medium text-white">
-    a frontend developer passionate about creating seamless digital experiences that are fast, responsive, and
-    user-friendly.
-  </p>
-</motion.div>
-        <motion.div
-          className="absolute right-19 top-70 z-40 flex w-56 flex-col"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          {stats.map((stat, index) => (
-            <div key={stat.label}>
-              <div className="flex flex-col gap-1 py-5">
-                <span className="text-display-2xl font-bold text-white">
-                  <CountUp target={stat.value} suffix={stat.suffix} />
-                </span>
-                <span className="text-body-xs font-semibold text-white">{stat.label}</span>
+          <motion.div
+            className="absolute left-30 top-27 z-30 flex h-102 w-28.25 flex-col items-center justify-center gap-5.5 rounded-full border border-primary-300 px-5.5 py-8"
+            style={{ borderWidth: "1.36px" }}
+            initial={{ opacity: 0, x: -30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.5, duration: 0.6 }}
+          >
+            {techIcons.map((icon) => (
+              <div
+                key={icon.alt}
+                className="flex size-17.25 items-center justify-center rounded-full border border-primary-300"
+                style={{ borderWidth: "1.36px" }}
+              >
+                <Image
+                  src={icon.src}
+                  alt={icon.alt}
+                  width={icon.alt === "JavaScript" ? 51 : icon.alt === "CSS3" ? 35 : icon.alt === "HTML5" ? 41 : 44}
+                  height={icon.alt === "JavaScript" ? 51 : icon.alt === "CSS3" ? 41 : icon.alt === "HTML5" ? 41 : 39}
+                />
               </div>
-              {index < stats.length - 1 && <div className="h-px w-full bg-primary-300" />}
-            </div>
-          ))}
+            ))}
+          </motion.div>
 
-          <ContactButton className="mt-6 h-14 w-full" />
-        </motion.div>
+          <div className="absolute left-1/2 top-65 z-40 -translate-x-1/2">
+            <AvailableBadge />
+          </div>
+
+          <HeroTitleFill
+            className="absolute left-1/2 top-81 z-10 ml-8 w-169 -translate-x-1/2"
+            frontendSize={152}
+            frontendLine={164}
+            developerSize={139}
+            developerLine={150}
+            developerOffset="mt-8"
+          />
+
+          <div className="absolute -bottom-20 left-1/2 z-20 ml-8 h-184 w-153 -translate-x-1/2">
+            <Image src="/images/hero-person.png" alt="Edwin Anderson" fill priority className="object-contain object-bottom" />
+          </div>
+
+          <DeveloperOutline
+            className="absolute left-1/2 top-130 z-30 ml-8 w-169 -translate-x-1/2"
+            size={139}
+            lineHeight={150}
+          />
+
+          <div
+            className="absolute left-1/2 top-81 z-30 ml-8 -translate-x-1/2 font-bonheur text-white"
+            style={{
+              fontSize: "113.23px",
+              lineHeight: "142px",
+              transform: "translateX(-50%) rotate(-12.34deg)",
+              marginRight: "220px",
+              marginTop: "-40px",
+            }}
+          >
+            Junior
+          </div>
+
+          <motion.div
+            className="absolute left-30 top-153.5 z-40 flex w-112.75 flex-col gap-3.5"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            <div className="flex size-15.75 items-center justify-center rounded-full border border-primary-300">
+              <Image src="/icons/mic.svg" alt="Mic" width={18} height={26} />
+            </div>
+            <p className="text-body-xl font-bold text-white">Hi, I'm Edwin Anderson</p>
+            <p className="text-body-lg font-medium text-white">
+              a frontend developer passionate about creating seamless digital experiences that are fast, responsive, and
+              user-friendly.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="absolute right-19 top-70 z-40 flex w-56 flex-col"
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
+            {stats.map((stat, index) => (
+              <div key={stat.label}>
+                <div className="flex flex-col gap-1 py-5">
+                  <span className="text-display-2xl font-bold text-white">
+                    <CountUp target={stat.value} suffix={stat.suffix} />
+                  </span>
+                  <span className="text-body-xs font-semibold text-white">{stat.label}</span>
+                </div>
+                {index < stats.length - 1 && <div className="h-px w-full bg-primary-300" />}
+              </div>
+            ))}
+
+            <ContactButton className="mt-6 h-14 w-full" />
+          </motion.div>
+        </div>
       </div>
 
-      <ScrollDown />
+      <ScrollDown isDesktop={isDesktop} desktopScale={desktopScale} />
     </section>
   );
 }
