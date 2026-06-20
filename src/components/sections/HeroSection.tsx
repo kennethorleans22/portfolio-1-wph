@@ -304,8 +304,8 @@ const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) 
             transformOrigin: "top left",
           }}
         >
-          <Image src="/icons/star.svg" alt="" width={140} height={140} className="absolute left-82 top-108 z-10" />
-          <Image src="/icons/star.svg" alt="" width={124} height={124} className="absolute bottom-23 right-86 z-10" />
+                    <Image src="/icons/star.svg" alt="" width={166} height={166} className="absolute left-76 top-98.75 z-10" />
+          <Image src="/icons/star.svg" alt="" width={166} height={166} className="absolute top-184 left-225 z-10 -rotate-[59.14deg]" />
 
           <motion.div
             className="absolute left-30 top-27 z-30 flex h-102 w-28.25 flex-col items-center justify-center gap-5.5 rounded-full border border-primary-300 px-5.5 py-8"
