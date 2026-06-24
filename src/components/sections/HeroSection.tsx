@@ -185,17 +185,17 @@ function ScrollDown({
 export default function HeroSection() {
 const viewportSize = useViewportSize();
 const measuredWidth = viewportSize?.width ?? 1440;
-const measuredHeight = viewportSize?.height ?? 1024;
 const isDesktop = measuredWidth >= 1024;
 const desktopScale = isDesktop ? Math.min(1, measuredWidth / 1440) : 1;
-const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) : 1028;
+const heroHeight = isDesktop ? 1024 * desktopScale : 1028;
 
   return (
-    <section
-      id="home"
-      className="relative overflow-hidden"
-      style={{ backgroundColor: "#A53F65", minHeight: heroMinHeight }}
-    >
+ <section
+  id="home"
+  className="relative overflow-hidden"
+  style={{ backgroundColor: "#A53F65", height: heroHeight }}
+>
+    
       <div className="absolute inset-0 z-0">
         <Image src="/images/hero-bg.svg" alt="" fill priority className="object-cover object-center" />
       </div>
@@ -214,7 +214,7 @@ const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) 
             <div className="flex size-12 items-center justify-center rounded-full border border-primary-300">
               <Image src="/icons/mic.svg" alt="Mic" width={14} height={20} />
             </div>
-            <p className="text-body-md font-bold text-white">Hi, I'm Edwin Anderson</p>
+            <p className="text-body-md font-bold text-white">{"Hi, I'm Edwin Anderson"}</p>
             <p className="text-body-sm font-medium text-white">
               a frontend developer passionate about creating seamless digital experiences that are fast, responsive,
               and user-friendly.
@@ -305,7 +305,8 @@ const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) 
           }}
         >
                     <Image src="/icons/star.svg" alt="" width={166} height={166} className="absolute left-76 top-98.75 z-10" />
-          <Image src="/icons/star.svg" alt="" width={166} height={166} className="absolute top-184 left-225 z-10 -rotate-[59.14deg]" />
+          <Image src="/icons/star.svg" alt="" width={166} height={166} className="absolute top-184 left-225 z-10"
+style={{ transform: "rotate(-59.14deg)" }} />
 
           <motion.div
             className="absolute left-30 top-27 z-30 flex h-102 w-28.25 flex-col items-center justify-center gap-5.5 rounded-full border border-primary-300 px-5.5 py-8"
@@ -379,7 +380,7 @@ const heroMinHeight = isDesktop ? Math.max(measuredHeight, 1024 * desktopScale) 
             <div className="flex size-15.75 items-center justify-center rounded-full border border-primary-300">
               <Image src="/icons/mic.svg" alt="Mic" width={18} height={26} />
             </div>
-            <p className="text-body-xl font-bold text-white">Hi, I'm Edwin Anderson</p>
+            <p className="text-body-xl font-bold text-white">{"Hi, I'm Edwin Anderson"}</p>
             <p className="text-body-lg font-medium text-white">
               a frontend developer passionate about creating seamless digital experiences that are fast, responsive, and
               user-friendly.
