@@ -73,7 +73,7 @@ export default function PortfolioSection() {
   return (
     <section id="projects" className="w-full bg-white">
       <motion.div
-        className="mx-auto flex w-full max-w-300 flex-col gap-6 px-4 py-10 lg:gap-12 lg:px-30 lg:py-20"
+       className="flex w-full flex-col gap-6 px-4 py-10 lg:gap-12 lg:px-30 lg:py-20"
         variants={parent}
         initial="hidden"
         whileInView="visible"
@@ -84,7 +84,7 @@ export default function PortfolioSection() {
           variants={fadeUp}
           className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between"
         >
-          <div className="flex flex-col gap-2 lg:max-w-[686px]">
+       <div className="flex flex-col gap-2 lg:max-w-171.5">
             <h2 className="text-display-sm font-bold tracking-[-0.02em] text-gray-950 lg:text-display-xl lg:leading-14 lg:tracking-[-0.03em]">
               Design to <span className="text-primary-300">Code Accuracy</span>
             </h2>

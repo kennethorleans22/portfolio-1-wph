@@ -70,7 +70,7 @@ function JobCard({ job }: { job: Job }) {
         </div>
       </div>
 
-      <p className="text-body-sm font-normal text-gray-400 lg:w-128 lg:shrink-0 lg:text-body-md lg:tracking-[-0.03em]">
+     <p className="text-body-sm font-normal text-gray-400 lg:w-128 lg:min-w-0 lg:text-body-md lg:tracking-[-0.03em]">
         {job.description}
       </p>
     </motion.div>

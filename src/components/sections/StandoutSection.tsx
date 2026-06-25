@@ -113,7 +113,7 @@ export default function StandoutSection() {
   return (
     <section className="w-full bg-white">
       <motion.div
-        className="mx-auto flex w-full max-w-300 flex-col gap-6 px-4 py-10 lg:gap-12 lg:px-30 lg:py-20"
+     className="flex w-full flex-col gap-6 px-4 py-10 lg:gap-12 lg:px-30 lg:py-20"
         variants={parent}
         initial="hidden"
         whileInView="visible"

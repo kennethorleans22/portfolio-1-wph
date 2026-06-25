@@ -6,6 +6,7 @@ import CodeDesignSection from '@/components/sections/CodeDesignSection';
 import StandoutSection from '@/components/sections/StandoutSection';
 import PortfolioSection from '@/components/sections/PortfolioSection';
 import ExperienceSection from '@/components/sections/ExperienceSection';
+import TestimonialSection from '@/components/sections/TestimonialSection';
 
 export default function Home() {
   return (
@@ -18,6 +19,7 @@ export default function Home() {
       <StandoutSection />
       <PortfolioSection />
       <ExperienceSection />
+      <TestimonialSection />
     </main>
   );
 }
