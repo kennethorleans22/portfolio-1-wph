@@ -7,10 +7,13 @@ import StandoutSection from '@/components/sections/StandoutSection';
 import PortfolioSection from '@/components/sections/PortfolioSection';
 import ExperienceSection from '@/components/sections/ExperienceSection';
 import TestimonialSection from '@/components/sections/TestimonialSection';
+import FAQSection from '@/components/sections/FAQSection';
+import ContactSection from '@/components/sections/ContactSection';
+import Footer from '@/components/layout/Footer';
 
 export default function Home() {
   return (
-    <main>
+   <main className="w-full overflow-x-clip bg-white">
       <Navbar />
       <HeroSection />
       <StatementSection />
@@ -20,6 +23,9 @@ export default function Home() {
       <PortfolioSection />
       <ExperienceSection />
       <TestimonialSection />
+      <FAQSection />
+      <ContactSection />
+      <Footer />
     </main>
   );
 }

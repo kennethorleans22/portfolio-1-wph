@@ -33,9 +33,9 @@ export default function RootLayout({
   return (
     <html
       lang='en'
-      className={`${montserrat.variable} ${anton.variable} ${bonheurRoyale.variable} h-full antialiased`}
+className={`${montserrat.variable} ${anton.variable} ${bonheurRoyale.variable} h-full overflow-x-clip antialiased`}
     >
-      <body className='min-h-full flex flex-col overflow-x-clip'>
+   <body className='flex min-h-full w-full flex-col overflow-x-clip'>
         {children}
       </body>
     </html>

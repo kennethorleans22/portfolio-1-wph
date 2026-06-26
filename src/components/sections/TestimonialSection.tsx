@@ -14,8 +14,8 @@ interface Testimonial {
 
 const testimonials: Testimonial[] = [
   {
-    quote:
-      "“Working with Edwin Anderson was a smooth experience from start to finish. He translated our design into clean, responsive code and even suggested improvements we hadn’t thought of. Highly recommended!”",
+  quote:
+  "“Working with Edwin Anderson was a smooth experience from start to finish. He translated our design into clean, responsive code and even suggested improvements we hadn’t thought of. Highly recommended!”",
     name: "Sarah Tan",
     role: "Product Manager at Finovate",
     avatar: "/images/sarah-tan.svg",
@@ -70,10 +70,10 @@ export default function TestimonialSection() {
 
   return (
     <section className="w-full bg-white">
-      <div className="mx-auto flex w-full max-w-300 flex-col items-center gap-6 px-5 py-10 lg:gap-12 lg:px-30 lg:py-20">
+      <div className="flex w-full flex-col items-center gap-6 px-5 py-10 lg:gap-12 lg:px-30 lg:py-20">
         {/* Header */}
         <motion.div
-          className="flex flex-col gap-2"
+         className="flex w-full max-w-88.25 flex-col gap-2 lg:max-w-211.75"
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
@@ -104,7 +104,7 @@ export default function TestimonialSection() {
                 animate="center"
                 exit="exit"
                 transition={{ duration: 0.3, ease: "easeOut" }}
-                className="relative z-10 flex flex-col items-center gap-8 rounded-2xl bg-primary-300 p-6 lg:rounded-3xl lg:px-10 lg:py-8"
+             className="relative z-10 flex min-h-119.5 w-full flex-col items-center gap-8 rounded-2xl bg-primary-300 p-6 lg:min-h-94.5 lg:rounded-3xl lg:px-10 lg:py-8"
               >
                 <div className="flex flex-col items-center gap-4">
                   <div className="flex items-center gap-1">
@@ -112,7 +112,7 @@ export default function TestimonialSection() {
                       <Star key={i} className="size-6 fill-secondary-100 text-secondary-100" />
                     ))}
                   </div>
-                  <p className="text-center text-body-lg font-semibold tracking-[-0.03em] text-gray-25 lg:text-display-xs">
+                  <p className="w-full text-center text-body-lg font-semibold tracking-[-0.03em] text-gray-25 lg:text-display-xs">
                     {active.quote}
                   </p>
                 </div>
